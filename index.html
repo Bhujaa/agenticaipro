@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SIGNAL — Distributed Agent Ops Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="arch-hierarchical">
+
+  <div class="app">
+
+    <!-- ===== Top identity bar ===== -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="brand__mark">◈</span>
+        <div class="brand__text">
+          <span class="brand__title">SIGNAL</span>
+          <span class="brand__sub">distributed agent ops console</span>
+        </div>
+      </div>
+      <div class="topbar__status">
+        <span class="status__dot" id="statusDot"></span>
+        <span id="statusText">standing by</span>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <!-- ===== Left rail: scenario + architecture ===== -->
+      <aside class="rail">
+
+        <section class="rail__block">
+          <h2 class="rail__heading">01 · Choose a case file</h2>
+          <div class="scenario-list" id="scenarioList"></div>
+        </section>
+
+        <section class="rail__block">
+          <h2 class="rail__heading">02 · Choose a network doctrine</h2>
+          <div class="arch-tabs" id="archTabs">
+            <button class="arch-tab" data-arch="hierarchical">
+              <span class="arch-tab__glyph">⌂</span>
+              <span class="arch-tab__label">Hierarchical</span>
+              <span class="arch-tab__desc">chain of command</span>
+            </button>
+            <button class="arch-tab" data-arch="decentralized">
+              <span class="arch-tab__glyph">◎</span>
+              <span class="arch-tab__label">Decentralized</span>
+              <span class="arch-tab__desc">gossip &amp; consensus</span>
+            </button>
+            <button class="arch-tab" data-arch="p2p">
+              <span class="arch-tab__glyph">✦</span>
+              <span class="arch-tab__label">Peer‑to‑Peer</span>
+              <span class="arch-tab__desc">direct negotiation</span>
+            </button>
+          </div>
+          <p class="brief" id="archBrief"></p>
+        </section>
+
+        <section class="rail__block">
+          <h2 class="rail__heading">03 · Deploy parameters</h2>
+          <div class="control-row">
+            <label for="agentCount">Field agents</label>
+            <input type="range" id="agentCount" min="5" max="24" value="12" />
+            <span class="control-row__value" id="agentCountVal">12</span>
+          </div>
+          <div class="control-row">
+            <label for="speed">Tempo</label>
+            <input type="range" id="speed" min="1" max="10" value="5" />
+            <span class="control-row__value" id="speedVal">5</span>
+          </div>
+        </section>
+
+        <div class="rail__actions">
+          <button class="btn btn--primary" id="btnStart">▶ Launch operation</button>
+          <button class="btn" id="btnStep">Step</button>
+          <button class="btn" id="btnReset">Reset</button>
+        </div>
+      </aside>
+
+      <!-- ===== Center: network canvas ===== -->
+      <main class="stage">
+        <div class="stage__header">
+          <div>
+            <h1 class="stage__title" id="scenarioTitle">Select a case file</h1>
+            <p class="stage__desc" id="scenarioDesc">Choose a scenario and doctrine from the left to brief the network.</p>
+          </div>
+          <div class="stage__phase" id="phaseChip">PHASE: idle</div>
+        </div>
+
+        <div class="stage__body">
+          <div class="maze-panel">
+            <div class="maze-panel__header">
+              <span class="maze-panel__label" id="mazeLabel">VAULT FLOOR PLAN</span>
+              <span class="maze-panel__frac" id="mazeFrac">0 steps traced</span>
+            </div>
+            <div class="maze-wrap">
+              <svg id="mazeCanvas" viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+
+          <div class="canvas-wrap">
+            <div class="canvas-wrap__label">Comms network</div>
+            <svg id="graphCanvas" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric__label">Ticks elapsed</span>
+            <span class="metric__value" id="metricTicks">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric__label">Messages sent</span>
+            <span class="metric__value" id="metricMessages">0</span>
+          </div>
+          <div class="metric">
+            <span class="metric__label">Network awareness</span>
+            <span class="metric__value" id="metricAwareness">0%</span>
+          </div>
+          <div class="metric">
+            <span class="metric__label">Efficiency</span>
+            <span class="metric__value" id="metricEfficiency">—</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- ===== Right rail: log console ===== -->
+      <aside class="log">
+        <h2 class="rail__heading">Comms intercept</h2>
+        <div class="log__list" id="logList"></div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
